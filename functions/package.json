@@ -1,0 +1,47 @@
+{
+  "name": "firebase-graphql-app-functions-side",
+  "scripts": {
+    "build": "tsc",
+    "dev": "NODE_ENV=development nodemon",
+    "serve": "npm run build && firebase serve --only functions --port 5021",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "8"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "@types/http-errors": "^1.6.2",
+    "apollo-server-express": "^2.9.7",
+    "cors": "^2.8.5",
+    "exprss": "0.0.1-security",
+    "firebase-admin": "^8.6.0",
+    "firebase-functions": "^3.3.0",
+    "graphql": "^14.5.8",
+    "graphql-tools": "^4.0.6",
+    "helmet": "^3.21.2",
+    "http-errors": "^1.7.3",
+    "log4js": "^5.3.0",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.6",
+    "@types/express": "^4.17.2",
+    "@types/helmet": "0.0.45",
+    "@types/morgan": "^1.7.37",
+    "@types/node": "^12.12.7",
+    "firebase-functions-test": "^0.1.6",
+    "nodemon": "^1.19.4",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.2.2"
+  },
+  "nodemonConfig": {
+    "watch": ["./src"],
+    "ext": "ts",
+    "exec": "ts-node ./src/app.ts"
+  },
+  "private": true
+}
