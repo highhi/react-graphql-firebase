@@ -1,8 +1,7 @@
 import React, { useCallback, useState } from 'react'
-import './App.css'
-import { FETCH_USERS } from './graphql/queries/fetchUsers'
 import { useLazyQuery } from '@apollo/react-hooks'
-import { FetchUsers_user } from './graphql/queries/__generated__/FetchUsers'
+import { FETCH_USERS } from './graphql/queries/fetchUsers'
+import { FetchUsers } from './graphql/queries/__generated__/FetchUsers'
 
 function throwResponseError<R>(resJson: Promise<R>): Promise<R> {
   return resJson.catch(err => { throw err })
@@ -22,16 +21,16 @@ function httpClient<R>(): Promise<R> {
 }
 
 const App: React.FC = () => {
-  const [apiUsers, setApiUsers] = useState<FetchUsers_user[]>([])
-  const [gqlUsers, setGqlUsers] = useState<FetchUsers_user[]>([])
-  const [fetchUsers, { loading }] = useLazyQuery<{ users: FetchUsers_user[] }>(FETCH_USERS, {
+  const [apiUsers, setApiUsers] = useState<FetchUsers['users']>([])
+  const [gqlUsers, setGqlUsers] = useState<FetchUsers['users']>([])
+  const [fetchUsers, { loading }] = useLazyQuery<{ users: FetchUsers['users'] }>(FETCH_USERS, {
     onCompleted({ users }) {
       setGqlUsers(users)
     }
   })
 
   const onFetchFromApi = useCallback(async () => {
-    const users = await httpClient<FetchUsers_user[]>()
+    const users = await httpClient<FetchUsers['users']>()
     setApiUsers(users)
   }, [])
 

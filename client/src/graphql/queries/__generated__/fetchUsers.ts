@@ -6,11 +6,11 @@
 // GraphQL query operation: FetchUsers
 // ====================================================
 
-export interface FetchUsers_user {
+export interface FetchUsers_users {
   __typename: "User";
   name: string;
 }
 
 export interface FetchUsers {
-  user: (FetchUsers_user | null)[];
+  users: FetchUsers_users[];
 }
