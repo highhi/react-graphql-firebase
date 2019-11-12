@@ -8,15 +8,12 @@ const allowedOrigins = ['http://localhost:3000', 'http://localhost:5020']
 const corsOptions: CorsOptions = {
   origin: allowedOrigins,
   allowedHeaders: 'Content-Type',
-  maxAge: 100,
+  maxAge: 180,
 }
 
 export default function router(app: express.Application) {
   app.use('/api', cors(corsOptions), apiRoute)
-
-  apollo.applyMiddleware({ 
-    app,
-    cors: { ...corsOptions, maxAge: 180 } // GraphQLのリクスエトは全てPOSTなので少し長めに設定しておく
-  })
+  // Add route for /graphql
+  apollo.applyMiddleware({ app,　cors: corsOptions })
   app.use(errorRoute)
 }
