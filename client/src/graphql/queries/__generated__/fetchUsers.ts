@@ -3,14 +3,14 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: fetchUsers
+// GraphQL query operation: FetchUsers
 // ====================================================
 
-export interface fetchUsers_users {
+export interface FetchUsers_user {
   __typename: "User";
-  name: string | null;
+  name: string;
 }
 
-export interface fetchUsers {
-  users: (fetchUsers_users | null)[] | null;
+export interface FetchUsers {
+  user: (FetchUsers_user | null)[];
 }

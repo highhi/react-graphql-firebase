@@ -7,18 +7,18 @@ const mockUsers = [
 
 export const typeDefs = gql`
   type Query {
-    users: [User]
+    user: [User]!
   }
 
   type User {
-    name: String
-    age: Int
+    name: String!
+    age: Int!
   }
 `
 
 export const resolvers = {
   Query: {
-    users: () => mockUsers,
+    user: () => mockUsers,
   },
 }
 
