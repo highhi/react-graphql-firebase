@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import './App.css'
-import gql from 'graphql-tag'
+import { FETCH_USERS } from './graphql/queries/users'
 import { useLazyQuery } from '@apollo/react-hooks'
 
 function throwResponseError<R>(resJson: Promise<R>): Promise<R> {
@@ -19,14 +19,6 @@ function httpClient<R>(): Promise<R> {
     return json
   })
 }
-
-const FETCH_USERS = gql`
-  {
-    users {
-      name
-    }
-  }
-`
 
 type User = {
   name: string
