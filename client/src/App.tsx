@@ -28,17 +28,23 @@ const FETCH_USERS = gql`
   }
 `
 
+type User = {
+  name: string
+}
+
+type Users = User[]
+
 const App: React.FC = () => {
-  const [apiUsers, setApiUsers] = useState([{}])
-  const [gqlUsers, setGqlUsers] = useState([{}])
-  const [fetchUsers, { loading, data }] = useLazyQuery(FETCH_USERS, {
-    onCompleted() {
-      setGqlUsers(data.users)
+  const [apiUsers, setApiUsers] = useState<Users>([])
+  const [gqlUsers, setGqlUsers] = useState<Users>([])
+  const [fetchUsers, { loading }] = useLazyQuery<{ users: Users }>(FETCH_USERS, {
+    onCompleted({ users }) {
+      setGqlUsers(users)
     }
   })
 
   const onFetchFromApi = useCallback(async () => {
-    const users = await httpClient<{ name: string}[]>()
+    const users = await httpClient<Users>()
     setApiUsers(users)
   }, [])
 
@@ -51,7 +57,7 @@ const App: React.FC = () => {
       <div>
         <h2>From Api</h2>
         <button type="button" onClick={onFetchFromApi}>Fetch</button>
-        {apiUsers.map((user: any) => {
+        {apiUsers.map((user) => {
           return <p key={user.name}>{user.name}</p>
         })}
       </div>
@@ -59,7 +65,7 @@ const App: React.FC = () => {
         <h2>From GraphQL</h2>
         <button type="button" onClick={onFetchFromGql}>Fetch</button>
         {loading && <p>Loading...</p>}
-        {gqlUsers.map((user: any) => {
+        {gqlUsers.map((user) => {
           return <p key={user.name}>{user.name}</p>
         })}
       </div>
