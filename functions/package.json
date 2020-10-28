@@ -15,7 +15,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "@types/http-errors": "^1.6.2",
-    "apollo-server-express": "^2.9.7",
+    "apollo-server-express": "^2.14.2",
     "cors": "^2.8.5",
     "exprss": "0.0.1-security",
     "firebase-admin": "^8.6.0",
